@@ -31,9 +31,76 @@ import time
 #########################################################
 #                   Your Code Goes Below                #
 #########################################################
-
-
-
+"""
+drawSquare(myturtle=None, width=0, top_left_x=0, top_left_y=0)  
+drawLine(myturtle=None, x_start=0, y_start=0, x_end=0, y_end=0)
+drawCircle(myturtle=None, radius=0)
+setUpDartboard(myscreen=None, myturtle=None) 
+isInCircle(myturtle=None, circle_center_x=0, circle_center_y=0, radius=0)
+throwDart(myturtle=None)
+playDarts(myturtle=None) 
+montePi(myturtle=None, num_darts=0) 
+"""
+def drawSquare(myturtle=None, width=0, top_left_x=0, top_left_y=0):
+  right_angle=90
+  myturtle.pu()
+  myturtle.goto(top_left_x, top_left_y)
+  for i in range(4):
+    myturtle.pd()
+    myturtle.fd(width)
+    myturtle.rt(right_angle)
+def drawLine(myturtle=None, x_start=0, y_start=0, x_end=0, y_end=0):
+  myturtle.pu()
+  myturtle.goto(x_start, y_start)
+  myturtle.pd()
+  myturtle.goto(x_end, y_end)
+def drawCircle(myturtle=None, radius=0):
+  myturtle.pd()
+  myturtle.circle(radius, None, 100)
+def setUpDartboard(myscreen=None, myturtle=None):
+  myscreen.setworldcoordinates(-1,-1,1,1)
+  drawSquare(myturtle, 2, -1, 1)
+  drawLine(myturtle, -1,0,1,0)
+  drawLine(myturtle,0,1,0,-1)
+  drawCircle(myturtle, 1)
+def isInCircle(myturtle=None, circle_center_x=0, circle_center_y=0, radius=0):
+  if myturtle.distance(circle_center_x, circle_center_y)<radius:
+    myturtle.dot(None, "green")
+    return True
+  else:
+    myturtle.dot(None, "red")
+    return False
+def throwDart(myturtle=None):
+  dart_landing_x= random.uniform(-1,1)
+  dart_landing_y= random.uniform(-1,1)
+  myturtle.pu()
+  myturtle.goto(dart_landing_x, dart_landing_y)
+  myturtle.pd()
+  myturtle.dot()
+def playDarts(myturtle=None):
+  player1_score=0
+  player2_score=0
+  for games in range(10):
+    throwDart(myturtle)
+    if isInCircle(myturtle,0,0,1)==True:
+      player1_score +=1
+    throwDart(myturtle)
+    if isInCircle(myturtle,0,0,1)==True:
+      player2_score+=1
+  if player1_score==player2_score:
+    print("Draw!")
+  elif player1_score>player2_score:
+    print("player 1 wins!")
+  elif player1_score<player2_score:
+    print("player 2 wins!")
+def montePi(myturtle=None, num_darts=0):
+  inside_count=0
+  for throws in range(num_darts):
+    throwDart(myturtle)
+    if isInCircle(myturtle,0,0,1)==True:
+      inside_count+=1
+  return (inside_count/num_darts)*4
+  
 #########################################################
 #         Do not alter any code below here              #
 #       Your code must work with the main proivided     #
