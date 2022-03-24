@@ -77,7 +77,7 @@ def throwDart(myturtle=None):
   myturtle.goto(dart_landing_x, dart_landing_y)
   myturtle.pd()
   myturtle.dot()
-  isInCircle(myturtle,0,0,1)
+  return isInCircle(myturtle,0,0,1)
 def playDarts(myturtle=None):
   player1_score=0
   player2_score=0
