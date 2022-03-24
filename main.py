@@ -41,7 +41,17 @@ throwDart(myturtle=None)
 playDarts(myturtle=None) 
 montePi(myturtle=None, num_darts=0) 
 """
+
 def drawSquare(myturtle=None, width=0, top_left_x=0, top_left_y=0):
+"""
+draws the square that represents the wooden board
+arg: 
+turtle object, 
+width holds an integer that represents the widths of the square, 
+top_left_x holds an integer that represents x-coordinate, 
+top_left_y holds an integer that represents y-coordinate of the top left corner 
+return: none
+"""
   right_angle=90
   myturtle.pu()
   myturtle.goto(top_left_x, top_left_y)
@@ -50,20 +60,55 @@ def drawSquare(myturtle=None, width=0, top_left_x=0, top_left_y=0):
     myturtle.fd(width)
     myturtle.rt(right_angle)
 def drawLine(myturtle=None, x_start=0, y_start=0, x_end=0, y_end=0):
+"""
+draws a line starting from a given x,y coordinates to another given x,y coordinates as destiny
+arg: 
+turtle object,
+x_start holds an integer that represents the x-coordinate of the starting position of the line,
+y_start holds an integer that represents the y-coordinate of the starting position of the line,
+x_end holds an integer that represents the x-coordinate of the ending position of the line,
+y_end holds an integer that represents the y-coordinate of the ending position of the line,
+return: none
+"""
   myturtle.pu()
   myturtle.goto(x_start, y_start)
   myturtle.pd()
   myturtle.goto(x_end, y_end)
 def drawCircle(myturtle=None, radius=0):
+"""
+draws a circle depending on the parameters
+arg: 
+turtle object, 
+radius holds an integer that represents the radius of the circle drawn  
+return: none
+"""
   myturtle.pd()
   myturtle.circle(radius, None, 100)
 def setUpDartboard(myscreen=None, myturtle=None):
+"""
+sets up the dartboard using the drawing functions defined above. Square represents the wooden board, two lines for each x and y-axis of the dartboard, circle is the scoring zone for the dart game
+arg: 
+screen object,
+turtle object, 
+return: none
+"""
   myscreen.setworldcoordinates(-1,-1,1,1)
   drawSquare(myturtle, 2, -1, 1)
   drawLine(myturtle, -1,0,1,0)
   drawLine(myturtle,0,1,0,-1)
   drawCircle(myturtle, 1)
 def isInCircle(myturtle=None, circle_center_x=0, circle_center_y=0, radius=0):
+"""
+checks if the dart landed on the scoring zone circle, returns True if the dart is in the circle, returns False if the dart is outside of the circle
+arg: 
+turtle object, 
+circle_center_x holds an integer that represents the x coordinate of the center of the scoring zone circle,
+circle_center_y holds an integer that represents the y coordinate of the center of the scoring zone circle, 
+radius holds and integer that represents the radius of the scoring zone circle
+return: 
+True,
+False
+"""
   if myturtle.distance(circle_center_x, circle_center_y)<radius:
     myturtle.dot(None, "green")
     return True
@@ -71,6 +116,14 @@ def isInCircle(myturtle=None, circle_center_x=0, circle_center_y=0, radius=0):
     myturtle.dot(None, "red")
     return False
 def throwDart(myturtle=None):
+"""
+draws a dot on the dartboard randomly, then returns whether the dart is inside of the scoring zone.
+arg:
+turtle object, 
+return: 
+True,
+False
+"""
   dart_landing_x= random.uniform(-1,1)
   dart_landing_y= random.uniform(-1,1)
   myturtle.pu()
@@ -79,6 +132,12 @@ def throwDart(myturtle=None):
   myturtle.dot()
   return isInCircle(myturtle,0,0,1)
 def playDarts(myturtle=None):
+"""
+sets up a game where two players take turns to throw a dart that randomly lands on the dartboard. players score a point when the dart lands within the scoring zone circle.
+arg: 
+turtle object
+return: none
+"""
   player1_score=0
   player2_score=0
   for games in range(10):
@@ -95,6 +154,13 @@ def playDarts(myturtle=None):
   elif player1_score<player2_score:
     print("player 2 wins!")
 def montePi(myturtle=None, num_darts=0):
+"""
+perform an experiment that approximates the value of pi
+arg: 
+turtle object, 
+numb_darts hold an integer that represents the number of darts thrown (number of trials for the experiment)
+return: a float value that represents the approximation of pi
+"""
   inside_count=0
   for throws in range(num_darts):
     if throwDart(myturtle)==True:
