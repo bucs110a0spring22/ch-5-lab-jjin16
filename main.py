@@ -77,15 +77,16 @@ def throwDart(myturtle=None):
   myturtle.goto(dart_landing_x, dart_landing_y)
   myturtle.pd()
   myturtle.dot()
+  isInCircle(myturtle,0,0,1)
 def playDarts(myturtle=None):
   player1_score=0
   player2_score=0
   for games in range(10):
-    throwDart(myturtle)
-    if isInCircle(myturtle,0,0,1)==True:
+    if throwDart(myturtle)==True:
+    #if isInCircle(myturtle,0,0,1)==True:
       player1_score +=1
-    throwDart(myturtle)
-    if isInCircle(myturtle,0,0,1)==True:
+    if throwDart(myturtle)==True:
+    #if isInCircle(myturtle,0,0,1)==True:
       player2_score+=1
   if player1_score==player2_score:
     print("Draw!")
@@ -96,8 +97,7 @@ def playDarts(myturtle=None):
 def montePi(myturtle=None, num_darts=0):
   inside_count=0
   for throws in range(num_darts):
-    throwDart(myturtle)
-    if isInCircle(myturtle,0,0,1)==True:
+    if throwDart(myturtle)==True:
       inside_count+=1
   return (inside_count/num_darts)*4
   
